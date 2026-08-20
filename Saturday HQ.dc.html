@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#0C0D11;}
+body{font-family:'Instrument Sans',sans-serif;color:#F3EFE7;-webkit-font-smoothing:antialiased;}
+a{color:#F5A524;text-decoration:none;}
+a:hover{color:#FFC163;}
+*{box-sizing:border-box;}
+button{font-family:'Instrument Sans',sans-serif;}
+::-webkit-scrollbar{height:0;width:8px;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+select option{background:#1B1E26;color:#F3EFE7;}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#0C0D11;color:#F3EFE7;">
+  <header style="position:sticky;top:0;z-index:50;background:rgba(12,13,17,0.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);">
+    <div style="max-width:1160px;margin:0 auto;padding:12px 16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <div style="display:flex;align-items:baseline;gap:10px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:24px;letter-spacing:0.04em;line-height:1;">SATURDAY <span style="color:#F5A524;">HQ</span></div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.14em;color:#98A0AD;border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:2px 7px;">WEEK 1</div>
+      </div>
+      <div style="width:32px;height:32px;border-radius:999px;background:linear-gradient(135deg,#2A2E3A,#1B1E26);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:#F5A524;">P</div>
+    </div>
+    <nav style="max-width:1160px;margin:0 auto;padding:8px 16px 0;display:flex;gap:4px;">
+      <sc-for list="{{ navTabs }}" as="t" hint-placeholder-count="3">
+        <button onClick="{{ t.pick }}" style="appearance:none;background:none;border:none;cursor:pointer;padding:8px 12px 10px;font-size:14px;font-weight:600;letter-spacing:0.01em;color:{{ t.color }};border-bottom:2px solid {{ t.line }};">{{ t.label }}</button>
+      </sc-for>
+    </nav>
+  </header>
+  <div style="background:#101218;border-bottom:1px solid rgba(255,255,255,0.06);">
+    <div style="max-width:1160px;margin:0 auto;padding:7px 16px;display:flex;align-items:center;gap:10px;font-size:12px;">
+      <span style="display:flex;align-items:center;gap:6px;flex-shrink:0;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;letter-spacing:0.16em;color:#FF5C5C;"><span style="width:6px;height:6px;border-radius:999px;background:#FF5C5C;animation:pulse 1.4s infinite;"></span>CHAOS CAM</span>
+      <span style="color:#C6CBD4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ tickerMsg }}</span>
+    </div>
+  </div>
+  <main style="max-width:1160px;margin:0 auto;padding:24px 16px 64px;">
+    <sc-if value="{{ isCommand }}" hint-placeholder-val="{{ true }}">
+      <section data-screen-label="Command Center">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;">
+          <div>
+            <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:38px;line-height:1;margin:0;letter-spacing:0.01em;">Saturday Command Center</h1>
+            <p style="margin:8px 0 0;color:#98A0AD;font-size:15px;">Your plan for college football today.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#98A0AD;">
+            <span style="font-weight:600;color:#F3EFE7;">Saturday, September 5</span>
+            <span style="color:#3A3F4B;">·</span>
+            <span>22 games</span>
+            <span style="color:#3A3F4B;">·</span>
+            <span>72° and clear</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:20px;">
+          <div style="background:linear-gradient(160deg,#191411,#14161C 60%);border:1px solid rgba(255,138,61,0.35);border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:18px;">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:72px;line-height:0.9;color:#FF8A3D;">91</span>
+            <div style="flex:1;min-width:0;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:0.2em;color:#F3EFE7;">NATIONAL CHAOS</div>
+              <div style="height:8px;border-radius:99px;background:rgba(255,255,255,0.08);margin-top:8px;"><div style="height:8px;border-radius:99px;width:91%;background:linear-gradient(90deg,#F5A524,#FF5C5C);"></div></div>
+              <div style="font-size:13px;color:#C6CBD4;margin-top:8px;">Today is a 91. Clear your schedule.</div>
+            </div>
+          </div>
+          <div style="background:#14161C;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:16px 18px;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.16em;color:#98A0AD;">CHAOS FORECAST</div>
+            <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px;">
+              <div style="font-size:13px;color:#C6CBD4;display:flex;gap:8px;"><span style="color:#F5A524;">›</span><span>80% chance of a top-10 upset</span></div>
+              <div style="font-size:13px;color:#C6CBD4;display:flex;gap:8px;"><span style="color:#F5A524;">›</span><span>Scattered chaos after dark, heaviest in the late window</span></div>
+              <div style="font-size:13px;color:#C6CBD4;display:flex;gap:8px;"><span style="color:#F5A524;">›</span><span>One (1) ranked team loses to a touchdown dog</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;overflow-x:auto;margin:22px 0 20px;padding-bottom:2px;align-items:center;">
+          <sc-for list="{{ windowTabs }}" as="w" hint-placeholder-count="4">
+            <button onClick="{{ w.pick }}" style="appearance:none;cursor:pointer;white-space:nowrap;padding:8px 16px;border-radius:999px;font-size:14px;font-weight:600;background:{{ w.bg }};color:{{ w.color }};border:1px solid {{ w.border }};">{{ w.label }}</button>
+          </sc-for>
+          <button onClick="{{ toggleSicko }}" style="appearance:none;cursor:pointer;white-space:nowrap;margin-left:auto;padding:8px 16px;border-radius:999px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.14em;background:{{ sickoBg }};color:{{ sickoColor }};border:1px solid {{ sickoBorder }};">SICKO MODE</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">
+          <sc-for list="{{ featured }}" as="f" hint-placeholder-count="3">
+            <div onClick="{{ f.open }}" style="cursor:pointer;background:{{ f.cardBg }};border:1px solid {{ f.cardBorder }};border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px;" style-hover="border-color:rgba(245,165,36,0.5)">
+              <div style="display:flex;height:4px;border-radius:99px;overflow:hidden;">
+                <div style="flex:1;background:{{ f.awC }};"></div>
+                <div style="flex:1;background:{{ f.hmC }};"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.16em;color:{{ f.roleColor }};">{{ f.role }}</span>
+                <span style="font-size:12px;color:#98A0AD;">{{ f.timeTv }}</span>
+              </div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;line-height:1.1;">{{ f.matchup }}</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                <span style="font-size:13px;color:#98A0AD;">{{ f.spread }}</span>
+                <span style="display:flex;align-items:baseline;gap:6px;">
+                  <span style="font-size:11px;letter-spacing:0.1em;color:#98A0AD;">CHAOS</span>
+                  <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:30px;line-height:1;color:{{ f.tierColor }};">{{ f.chaos }}</span>
+                </span>
+              </div>
+              <sc-if value="{{ f.isChaos }}" hint-placeholder-val="{{ false }}">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.18em;color:#FF8A3D;">MAXIMUM CHAOS</div>
+              </sc-if>
+              <p style="margin:0;font-size:13px;line-height:1.5;color:#C6CBD4;border-top:1px solid rgba(255,255,255,0.07);padding-top:10px;">{{ f.reason }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin:34px 0 14px;">
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:0.14em;margin:0;">{{ allGamesHeader }}</h2>
+          <span style="font-size:12px;color:#6B7280;">Ranked by {{ sortLabel }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <sc-for list="{{ windowGames }}" as="g" hint-placeholder-count="5">
+            <div onClick="{{ g.open }}" style="cursor:pointer;background:{{ g.rowBg }};border:1px solid rgba(255,255,255,0.07);border-left:3px solid {{ g.rowAccent }};border-radius:14px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;" style-hover="border-color:rgba(255,255,255,0.18)">
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <span style="width:48px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;letter-spacing:0.04em;padding:4px 0;border-radius:6px;background:{{ g.awBg }};color:{{ g.awFg }};">{{ g.awAb }}</span>
+                <span style="width:48px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;letter-spacing:0.04em;padding:4px 0;border-radius:6px;background:{{ g.hmBg }};color:{{ g.hmFg }};">{{ g.hmAb }}</span>
+              </div>
+              <div style="min-width:0;">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;line-height:1.25;">{{ g.matchup }}</div>
+                <div style="font-size:12px;color:#98A0AD;margin-top:4px;">{{ g.meta }}</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
+                  <sc-for list="{{ g.tagList }}" as="tg" hint-placeholder-count="2">
+                    <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;color:#98A0AD;border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:3px 6px;">{{ tg }}</span>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:34px;line-height:1;color:{{ g.tierColor }};">{{ g.chaos }}</div>
+                <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;color:{{ g.tierColor }};margin-top:4px;">{{ g.tierLabel }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ showAlert }}" hint-placeholder-val="{{ true }}">
+          <div onClick="{{ openTakeover }}" style="cursor:pointer;margin-top:28px;background:linear-gradient(160deg,#1C1114,#14161C 60%);border:1px solid rgba(255,92,92,0.35);border-radius:16px;padding:18px;" style-hover="border-color:rgba(255,92,92,0.7)">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="width:8px;height:8px;border-radius:999px;background:#FF5C5C;animation:pulse 1.4s infinite;"></span>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.2em;color:#FF5C5C;">CHAOS ALERT</span>
+              <span style="margin-left:auto;font-size:12px;font-weight:700;color:#F5A524;letter-spacing:0.08em;">OPEN GAME →</span>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:14px;">
+              <div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;">Auburn at Baylor</div>
+                <div style="font-size:13px;color:#98A0AD;margin-top:2px;">4th Quarter · 3:12</div>
+              </div>
+              <div style="display:flex;gap:20px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:30px;line-height:1;">
+                <span>BAY <span style="color:#F5A524;">31</span></span>
+                <span>AUB <span style="color:#F5A524;">30</span></span>
+              </div>
+              <div style="text-align:right;">
+                <div style="display:flex;align-items:baseline;gap:8px;justify-content:flex-end;">
+                  <span style="font-size:11px;letter-spacing:0.1em;color:#98A0AD;">CHAOS INDEX</span>
+                  <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:40px;line-height:1;color:#FF5C5C;">97</span>
+                </div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.2em;color:#FF5C5C;">DROP EVERYTHING</div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:28px;">
+          <div style="background:#14161C;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:18px;">
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:0.14em;margin:0 0 14px;">GROUP ACTIVITY</h3>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <sc-for list="{{ chat }}" as="c" hint-placeholder-count="3">
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                  <div style="width:28px;height:28px;border-radius:999px;flex-shrink:0;background:{{ c.avBg }};display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;color:#0C0D11;">{{ c.init }}</div>
+                  <div>
+                    <div style="display:flex;gap:8px;align-items:baseline;"><span style="font-weight:600;font-size:13px;">{{ c.name }}</span><span style="font-size:11px;color:#6B7280;">{{ c.time }}</span></div>
+                    <div style="font-size:14px;color:#C6CBD4;margin-top:2px;">{{ c.msg }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#14161C;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:18px;display:flex;flex-direction:column;">
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:0.14em;margin:0 0 14px;">RECEIPTS</h3>
+            <div style="display:flex;flex-direction:column;gap:10px;flex:1;">
+              <sc-for list="{{ receiptPreview }}" as="r" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px 12px;">
+                  <div style="min-width:0;">
+                    <div style="font-weight:600;font-size:13px;">{{ r.user }}</div>
+                    <div style="font-size:13px;color:#C6CBD4;">{{ r.text }}</div>
+                  </div>
+                  <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.14em;color:#98A0AD;border:1px solid rgba(255,255,255,0.14);border-radius:4px;padding:3px 7px;flex-shrink:0;">LOCKED</span>
+                </div>
+              </sc-for>
+            </div>
+            <button onClick="{{ goReceipts }}" style="margin-top:14px;appearance:none;cursor:pointer;background:none;border:1px solid rgba(245,165,36,0.5);color:#F5A524;border-radius:10px;padding:10px;font-weight:600;font-size:14px;" style-hover="background:rgba(245,165,36,0.08)">View All Receipts</button>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+    <sc-if value="{{ isChaos }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Chaos Index">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;">
+          <div>
+            <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:38px;line-height:1;margin:0;">Chaos Index</h1>
+            <p style="margin:8px 0 0;color:#98A0AD;font-size:15px;max-width:520px;">College football games ranked by their potential to go completely off the rails.</p>
+          </div>
+          <button onClick="{{ openMethod }}" style="appearance:none;cursor:pointer;background:none;border:1px solid rgba(255,255,255,0.14);color:#98A0AD;border-radius:999px;padding:7px 14px;font-size:13px;" style-hover="color:#F3EFE7;border-color:rgba(255,255,255,0.3)">How is Chaos calculated?</button>
+        </div>
+        <div style="display:flex;gap:8px;overflow-x:auto;margin:22px 0 8px;">
+          <sc-for list="{{ confChips }}" as="w" hint-placeholder-count="7">
+            <button onClick="{{ w.pick }}" style="appearance:none;cursor:pointer;white-space:nowrap;padding:7px 14px;border-radius:999px;font-size:13px;font-weight:600;background:{{ w.bg }};color:{{ w.color }};border:1px solid {{ w.border }};">{{ w.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:8px;overflow-x:auto;margin:0 0 22px;">
+          <sc-for list="{{ dayChips }}" as="w" hint-placeholder-count="5">
+            <button onClick="{{ w.pick }}" style="appearance:none;cursor:pointer;white-space:nowrap;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;background:{{ w.bg }};color:{{ w.color }};border:1px solid {{ w.border }};">{{ w.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.2em;color:#F5A524;">THE CHAOS PODIUM</div>
+          <sc-for list="{{ chaosTop }}" as="g" hint-placeholder-count="3">
+            <div onClick="{{ g.open }}" style="cursor:pointer;background:#14161C;border:1px solid rgba(245,165,36,0.25);border-radius:16px;padding:18px;" style-hover="border-color:rgba(245,165,36,0.5)">
+              <div style="display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;">
+                <div style="display:flex;gap:14px;align-items:baseline;">
+                  <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:26px;color:#3A3F4B;">#{{ g.rank }}</span>
+                  <div>
+                    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;line-height:1.15;">{{ g.matchup }}</div>
+                    <div style="font-size:12px;color:#98A0AD;margin-top:4px;">{{ g.meta }}</div>
+                  </div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="display:flex;align-items:baseline;gap:8px;justify-content:flex-end;">
+                    <span style="font-size:10px;letter-spacing:0.12em;color:#98A0AD;">CHAOS INDEX</span>
+                    <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:44px;line-height:1;color:{{ g.tierColor }};">{{ g.chaos }}</span>
+                  </div>
+                  <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.18em;color:{{ g.tierColor }};">{{ g.tierLabel }}</div>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 18px;margin-top:16px;">
+                <sc-for list="{{ g.bd }}" as="b" hint-placeholder-count="5">
+                  <div>
+                    <div style="display:flex;justify-content:space-between;font-size:11px;color:#98A0AD;margin-bottom:4px;"><span>{{ b.label }}</span><span style="color:#F3EFE7;font-weight:600;">{{ b.v }}</span></div>
+                    <div style="height:5px;border-radius:99px;background:rgba(255,255,255,0.08);"><div style="height:5px;border-radius:99px;background:{{ b.color }};width:{{ b.pct }};"></div></div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="margin-top:16px;border-top:1px solid rgba(255,255,255,0.07);padding-top:12px;">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.16em;color:#98A0AD;margin-bottom:8px;">WHY IT'S CHAOTIC</div>
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                  <sc-for list="{{ g.why }}" as="w" hint-placeholder-count="3">
+                    <div style="font-size:13px;color:#C6CBD4;display:flex;gap:8px;"><span style="color:#F5A524;">›</span><span>{{ w }}</span></div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.2em;color:#98A0AD;margin-top:10px;">THE BOARD</div>
+          <sc-for list="{{ chaosRest }}" as="g" hint-placeholder-count="6">
+            <div onClick="{{ g.open }}" style="cursor:pointer;background:{{ g.rowBg }};border:1px solid rgba(255,255,255,0.07);border-left:3px solid {{ g.rowAccent }};border-radius:14px;padding:13px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;" style-hover="border-color:rgba(255,255,255,0.18)">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:18px;color:#3A3F4B;min-width:32px;">#{{ g.rank }}</span>
+              <div style="min-width:0;">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;line-height:1.2;">{{ g.matchup }}</div>
+                <div style="font-size:12px;color:#98A0AD;margin-top:2px;">{{ g.meta }}</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;line-height:1;color:{{ g.tierColor }};">{{ g.chaos }}</div>
+                <div style="font-size:9px;font-weight:700;letter-spacing:0.12em;color:{{ g.tierColor }};margin-top:3px;">{{ g.tierLabel }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+    <sc-if value="{{ isReceipts }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Receipts">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;">
+          <div>
+            <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:38px;line-height:1;margin:0;">Receipts</h1>
+            <p style="margin:8px 0 0;color:#98A0AD;font-size:15px;">Talk is cheap. We keep the evidence.</p>
+          </div>
+          <button onClick="{{ openReceipt }}" style="appearance:none;cursor:pointer;background:#F5A524;color:#0C0D11;border:none;border-radius:10px;padding:11px 18px;font-weight:700;font-size:14px;" style-hover="background:#FFC163">+ Make a Receipt</button>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:8px;margin:20px 0 0;background:#14161C;border:1px solid rgba(255,255,255,0.1);border-radius:999px;padding:7px 14px;font-size:13px;">
+          <span style="color:#98A0AD;">Group</span>
+          <span style="font-weight:700;">Saturday Sickos</span>
+          <span style="color:#6B7280;font-size:11px;">▾</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:20px;align-items:start;">
+          <div style="background:#14161C;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:18px;">
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.14em;margin:0 0 14px;">LEADERBOARD</h3>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <sc-for list="{{ leaders }}" as="l" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:12px;border:1px solid {{ l.border }};background:{{ l.bg }};border-radius:12px;padding:12px 14px;">
+                  <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:20px;color:{{ l.rankColor }};min-width:22px;">{{ l.rank }}</span>
+                  <div style="flex:1;">
+                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span style="font-weight:700;font-size:15px;">{{ l.name }} {{ l.badge }}</span><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.12em;color:{{ l.titleColor }};border:1px solid {{ l.titleColor }};border-radius:4px;padding:2px 5px;">{{ l.title }}</span></div>
+                    <div style="font-size:12px;color:#98A0AD;">{{ l.record }}</div>
+                    <div style="font-size:11px;color:{{ l.streakColor }};margin-top:2px;">{{ l.streak }}</div>
+                  </div>
+                  <div style="text-align:right;">
+                    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:26px;line-height:1;color:{{ l.scoreColor }};">{{ l.rating }}</div>
+                    <div style="font-size:9px;letter-spacing:0.12em;color:#6B7280;">RECEIPT RATING</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:22px;background:linear-gradient(160deg,#17130C,#14161C 70%);border:1px solid rgba(245,165,36,0.3);border-radius:16px;padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:22px;letter-spacing:0.06em;color:#F5A524;">THE SUNDAY PAPER</div>
+                <span style="font-size:11px;letter-spacing:0.12em;color:#6B7280;">WEEK 0 RECAP</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px;">
+                <div style="display:flex;gap:10px;font-size:13px;color:#C6CBD4;"><span style="flex-shrink:0;color:#98A0AD;min-width:92px;font-size:10px;letter-spacing:0.1em;font-weight:700;padding-top:2px;">MOVER</span><span>Perry +14 — takes #1 with a perfect Week 0</span></div>
+                <div style="display:flex;gap:10px;font-size:13px;color:#C6CBD4;"><span style="flex-shrink:0;color:#98A0AD;min-width:92px;font-size:10px;letter-spacing:0.1em;font-weight:700;padding-top:2px;">BEST RECEIPT</span><span>“Georgia wins by at least 17.” — <span style="color:#3DD68C;font-weight:700;">NAILED IT</span></span></div>
+                <div style="display:flex;gap:10px;font-size:13px;color:#C6CBD4;"><span style="flex-shrink:0;color:#98A0AD;min-width:92px;font-size:10px;letter-spacing:0.1em;font-weight:700;padding-top:2px;">WORST RECEIPT</span><span>“Auburn wins by double digits.” — <span style="color:#FF5C5C;font-weight:700;">AGED LIKE MILK</span></span></div>
+                <div style="display:flex;gap:10px;font-size:13px;color:#C6CBD4;"><span style="flex-shrink:0;color:#98A0AD;min-width:92px;font-size:10px;letter-spacing:0.1em;font-weight:700;padding-top:2px;">CHAOS GAME</span><span>Baylor 34, Auburn 17 · Chaos peaked at 97</span></div>
+              </div>
+              <button onClick="{{ recapShare }}" style="display:block;width:100%;margin-top:16px;appearance:none;cursor:pointer;background:none;border:1px solid rgba(245,165,36,0.5);color:#F5A524;border-radius:10px;padding:9px;font-weight:600;font-size:13px;" style-hover="background:rgba(245,165,36,0.08)">{{ recapLabel }}</button>
+            </div>
+            <div style="margin-top:22px;background:#0F1014;border:1px dashed rgba(255,255,255,0.14);border-radius:16px;padding:20px;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:22px;letter-spacing:0.06em;color:#FF5C5C;">RECEIPT FOUND</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;line-height:1.2;margin:10px 0 6px;">“Auburn wins by double digits.”</div>
+              <div style="font-size:12px;color:#98A0AD;">Matt · August 29</div>
+              <div style="display:flex;align-items:center;gap:16px;margin-top:14px;">
+                <span style="font-size:11px;letter-spacing:0.12em;color:#6B7280;">FINAL</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;">BAYLOR 34 · AUBURN 17</span>
+              </div>
+              <div style="display:inline-block;margin-top:12px;transform:rotate(-2deg);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:0.14em;color:#FF5C5C;border:2px solid #FF5C5C;border-radius:6px;padding:4px 10px;">AGED LIKE MILK</div>
+              <button onClick="{{ fakeShare }}" style="display:block;width:100%;margin-top:16px;appearance:none;cursor:pointer;background:none;border:1px solid rgba(255,255,255,0.16);color:#F3EFE7;border-radius:10px;padding:9px;font-weight:600;font-size:13px;" style-hover="border-color:rgba(255,255,255,0.35)">{{ shareLabel }}</button>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <sc-for list="{{ receiptCards }}" as="r" hint-placeholder-count="4">
+              <div style="background:#14161C;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:16px 18px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+                  <span style="font-weight:700;font-size:14px;">{{ r.user }}</span>
+                  <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.14em;color:{{ r.statusColor }};border:1px solid {{ r.statusColor }};border-radius:4px;padding:3px 8px;">{{ r.status }}</span>
+                </div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:21px;line-height:1.25;margin:8px 0 6px;">“{{ r.text }}”</div>
+                <div style="font-size:12px;color:#98A0AD;">{{ r.game }} · Submitted {{ r.ts }}</div>
+                <sc-if value="{{ r.hasResult }}" hint-placeholder-val="{{ false }}">
+                  <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,0.07);padding-top:8px;font-size:13px;color:#C6CBD4;">Result: <span style="font-weight:700;color:#F3EFE7;">{{ r.result }}</span></div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+  </main>
+  <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeSel }}" style="position:fixed;inset:0;z-index:100;background:rgba(5,6,8,0.7);backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;">
+      <div onClick="{{ eatClick }}" style="background:#14161C;border:1px solid rgba(255,255,255,0.12);border-radius:20px 20px 0 0;width:100%;max-width:640px;max-height:88vh;overflow-y:auto;padding:22px 20px 32px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;line-height:1.1;">{{ sel.matchup }}</div>
+            <div style="display:flex;height:4px;width:120px;border-radius:99px;overflow:hidden;margin-top:8px;">
+              <div style="flex:1;background:{{ sel.awC }};"></div>
+              <div style="flex:1;background:{{ sel.hmC }};"></div>
+            </div>
+            <div style="font-size:13px;color:#98A0AD;margin-top:6px;">Saturday · {{ sel.time }} · {{ sel.tv }}</div>
+            <div style="font-size:13px;color:#C6CBD4;margin-top:4px;">{{ sel.spread }} · O/U {{ sel.ou }}</div>
+          </div>
+          <button onClick="{{ closeSel }}" style="appearance:none;cursor:pointer;background:none;border:1px solid rgba(255,255,255,0.14);color:#98A0AD;border-radius:999px;width:30px;height:30px;font-size:14px;flex-shrink:0;">✕</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:18px;background:#0F1014;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px 16px;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:52px;line-height:1;color:{{ sel.tierColor }};">{{ sel.chaos }}</span>
+          <div>
+            <div style="font-size:10px;letter-spacing:0.14em;color:#98A0AD;">CHAOS INDEX</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:0.16em;color:{{ sel.tierColor }};">{{ sel.tierLabel }}</div>
+          </div>
+        </div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.16em;color:#98A0AD;margin:18px 0 8px;">WHY WE'RE WATCHING</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <sc-for list="{{ sel.why }}" as="w" hint-placeholder-count="3">
+            <div style="font-size:14px;color:#C6CBD4;display:flex;gap:8px;"><span style="color:#F5A524;">›</span><span>{{ w }}</span></div>
+          </sc-for>
+        </div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.16em;color:#98A0AD;margin:18px 0 10px;">CHAOS BREAKDOWN</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <sc-for list="{{ sel.bd }}" as="b" hint-placeholder-count="5">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;color:#98A0AD;margin-bottom:4px;"><span>{{ b.label }}</span><span style="color:#F3EFE7;font-weight:600;">{{ b.v }}</span></div>
+              <div style="height:6px;border-radius:99px;background:rgba(255,255,255,0.08);"><div style="height:6px;border-radius:99px;background:{{ b.color }};width:{{ b.pct }};"></div></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.16em;color:#98A0AD;margin:18px 0 8px;">GROUP CONSENSUS</div>
+        <div style="display:flex;height:10px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,0.08);">
+          <div style="width:{{ sel.consAwayPct }};background:#F5A524;"></div>
+          <div style="width:{{ sel.consHomePct }};background:#3A3F4B;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:#C6CBD4;margin-top:6px;">
+          <span>{{ sel.consAwayLabel }}</span><span style="color:#98A0AD;">{{ sel.consHomeLabel }}</span>
+        </div>
+        <div style="font-size:12px;color:#6B7280;margin-top:6px;">Fade the group and win: +10 Receipt Rating.</div>
+        <div style="display:flex;gap:10px;margin-top:22px;">
+          <button onClick="{{ toggleWatch }}" style="flex:1;appearance:none;cursor:pointer;background:{{ watchBg }};color:{{ watchColor }};border:1px solid rgba(245,165,36,0.6);border-radius:10px;padding:12px;font-weight:700;font-size:13px;letter-spacing:0.04em;">{{ watchLabel }}</button>
+          <button onClick="{{ receiptFromSel }}" style="flex:1;appearance:none;cursor:pointer;background:none;color:#F3EFE7;border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:12px;font-weight:700;font-size:13px;letter-spacing:0.04em;" style-hover="border-color:rgba(255,255,255,0.4)">MAKE A RECEIPT</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ showMethod }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeMethod }}" style="position:fixed;inset:0;z-index:100;background:rgba(5,6,8,0.7);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;">
+      <div onClick="{{ eatClick }}" style="background:#14161C;border:1px solid rgba(255,255,255,0.12);border-radius:20px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;padding:24px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:24px;margin:0;">How Chaos is calculated</h3>
+          <button onClick="{{ closeMethod }}" style="appearance:none;cursor:pointer;background:none;border:1px solid rgba(255,255,255,0.14);color:#98A0AD;border-radius:999px;width:30px;height:30px;font-size:14px;">✕</button>
+        </div>
+        <p style="font-size:14px;line-height:1.55;color:#C6CBD4;margin:14px 0 12px;">The Chaos Index is a 0–100 score for how likely a game is to get weird. The full model will eventually combine:</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <sc-for list="{{ methodFactors }}" as="m" hint-placeholder-count="8">
+            <div style="font-size:14px;color:#C6CBD4;display:flex;gap:8px;"><span style="color:#F5A524;">›</span><span>{{ m }}</span></div>
+          </sc-for>
+        </div>
+        <p style="font-size:13px;line-height:1.55;color:#98A0AD;margin:16px 0 0;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">Chaos is an entertainment metric. It tells you what to watch, not what to bet. It is not a gambling recommendation.</p>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ showReceiptModal }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeReceipt }}" style="position:fixed;inset:0;z-index:110;background:rgba(5,6,8,0.7);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;">
+      <div onClick="{{ eatClick }}" style="background:#14161C;border:1px solid rgba(255,255,255,0.12);border-radius:20px;width:100%;max-width:480px;max-height:88vh;overflow-y:auto;padding:24px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:24px;margin:0;">Make a Receipt</h3>
+          <button onClick="{{ closeReceipt }}" style="appearance:none;cursor:pointer;background:none;border:1px solid rgba(255,255,255,0.14);color:#98A0AD;border-radius:999px;width:30px;height:30px;font-size:14px;">✕</button>
+        </div>
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#98A0AD;margin:18px 0 6px;">YOUR PREDICTION</div>
+        <textarea value="{{ rtext }}" onChange="{{ onRtext }}" placeholder="Florida beats Tennessee outright." rows="3" style="width:100%;resize:none;background:#0F1014;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:12px;color:#F3EFE7;font-family:'Instrument Sans',sans-serif;font-size:15px;outline:none;"></textarea>
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#98A0AD;margin:14px 0 6px;">GAME</div>
+        <select value="{{ rgame }}" onChange="{{ onRgame }}" style="width:100%;background:#0F1014;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:11px;color:#F3EFE7;font-family:'Instrument Sans',sans-serif;font-size:14px;outline:none;">
+          <sc-for list="{{ gameOptions }}" as="o" hint-placeholder-count="5">
+            <option value="{{ o }}">{{ o }}</option>
+          </sc-for>
+        </select>
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#98A0AD;margin:14px 0 6px;">PREDICTION TYPE</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <sc-for list="{{ rtypes }}" as="t" hint-placeholder-count="6">
+            <button onClick="{{ t.pick }}" style="appearance:none;cursor:pointer;padding:7px 12px;border-radius:999px;font-size:13px;font-weight:600;background:{{ t.bg }};color:{{ t.color }};border:1px solid {{ t.border }};">{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#98A0AD;margin:14px 0 6px;">CONFIDENCE</div>
+        <div style="display:flex;gap:6px;">
+          <sc-for list="{{ confLevels }}" as="c" hint-placeholder-count="5">
+            <button onClick="{{ c.pick }}" style="appearance:none;cursor:pointer;width:40px;height:40px;border-radius:10px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;background:{{ c.bg }};color:{{ c.color }};border:1px solid {{ c.border }};">{{ c.n }}</button>
+          </sc-for>
+        </div>
+        <button onClick="{{ lockReceipt }}" style="display:block;width:100%;margin-top:20px;appearance:none;cursor:pointer;background:#F5A524;color:#0C0D11;border:none;border-radius:10px;padding:13px;font-weight:800;font-size:14px;letter-spacing:0.08em;" style-hover="background:#FFC163">LOCK RECEIPT</button>
+        <p style="font-size:12px;color:#6B7280;text-align:center;margin:10px 0 0;">Once the game starts, your receipt cannot be edited.</p>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ showTakeover }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeTakeover }}" style="position:fixed;inset:0;z-index:200;cursor:pointer;background:radial-gradient(ellipse at 50% 20%,#2A0F12,#0C0D11 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:6px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="width:10px;height:10px;border-radius:999px;background:#FF5C5C;animation:pulse 1s infinite;"></span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;letter-spacing:0.3em;color:#FF5C5C;">CHAOS ALERT</span>
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:140px;line-height:1;color:#FF5C5C;">97</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:44px;letter-spacing:0.1em;color:#F3EFE7;">DROP EVERYTHING</div>
+      <div style="font-size:15px;color:#C6CBD4;margin-top:8px;">Auburn at Baylor · 4th Quarter · 3:12</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:30px;margin-top:2px;">BAY 31 — AUB 30</div>
+      <button onClick="{{ closeTakeover }}" style="appearance:none;cursor:pointer;margin-top:22px;background:#FF5C5C;color:#0C0D11;border:none;border-radius:10px;padding:13px 26px;font-weight:800;font-size:14px;letter-spacing:0.1em;">OPEN GAME</button>
+      <div style="font-size:12px;color:#6B7280;margin-top:10px;">Tap anywhere to dismiss</div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showLiveAlert&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Command Center&quot;},&quot;defaultWindow&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Noon&quot;,&quot;options&quot;:[&quot;Noon&quot;,&quot;Afternoon&quot;,&quot;Primetime&quot;,&quot;Late Night&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Command Center&quot;},&quot;sortBy&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Chaos Index&quot;,&quot;options&quot;:[&quot;Chaos Index&quot;,&quot;Kickoff time&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Command Center&quot;}}">
+class Component extends DCLogic {
+  state = { tab: 'command', win: null, conf: 'All Games', cwin: 'All Day', selId: null, method: false, rmodal: false, rtext: '', rgame: 'Tennessee at Florida', rtype: 'Winner', rconf: 3, myReceipts: [], watch: {}, shared: false, sicko: false, takeover: false, tickerIdx: 0, recapShared: false };
+
+  componentDidMount() { this._t = setInterval(() => this.setState(st => ({ tickerIdx: st.tickerIdx + 1 })), 4000); }
+  componentWillUnmount() { clearInterval(this._t); }
+
+  tier(c) {
+    if (c >= 95) return { label: 'DROP EVERYTHING', color: '#FF5C5C' };
+    if (c >= 85) return { label: 'MAXIMUM CHAOS', color: '#FF8A3D' };
+    if (c >= 70) return { label: 'CHAOS WATCH', color: '#F5A524' };
+    if (c >= 50) return { label: 'GETTING WEIRD', color: '#D9B84A' };
+    if (c >= 30) return { label: 'WORTH MONITORING', color: '#98A0AD' };
+    return { label: 'PROBABLY NORMAL', color: '#6B7280' };
+  }
+
+  team(n) {
+    const T = { 'Auburn': ['AUB', '#0C2340'], 'Baylor': ['BAY', '#154734'], 'Tennessee': ['TENN', '#FF8200'], 'Florida': ['FLA', '#0021A5'], 'Iowa': ['IOWA', '#FFCD00'], 'Nebraska': ['NEB', '#E41C38'], 'Memphis': ['MEM', '#003087'], 'Tulane': ['TUL', '#006747'], 'Ohio State': ['OSU', '#BB0000'], 'Rutgers': ['RUT', '#CC0033'], 'Duke': ['DUKE', '#012169'], 'Wake Forest': ['WAKE', '#9E7E38'], 'Georgia': ['UGA', '#BA0C2F'], 'Clemson': ['CLEM', '#F56600'], 'Michigan': ['MICH', '#00274C'], 'Oklahoma': ['OU', '#841617'], 'Kansas State': ['KSU', '#512888'], 'Arizona': ['ARIZ', '#AB0520'], 'Boise State': ['BSU', '#0033A0'], 'Washington': ['UW', '#4B2E83'], 'Missouri': ['MIZ', '#F1B82D'], 'Kansas': ['KU', '#0051BA'], 'App State': ['APP', '#FFCC00'], 'South Carolina': ['SCAR', '#73000A'], 'Texas': ['TEX', '#BF5700'], 'Alabama': ['BAMA', '#9E1B32'], 'Notre Dame': ['ND', '#0C2340'], 'Miami': ['MIA', '#F47321'], 'Colorado': ['CU', '#CFB87C'], 'Texas Tech': ['TTU', '#CC0000'], 'LSU': ['LSU', '#461D7C'], 'USC': ['USC', '#990000'], 'Oregon': ['ORE', '#154733'], 'Georgia Tech': ['GT', '#B3A369'], 'Utah': ['UTAH', '#CC0000'], 'UCLA': ['UCLA', '#2D68C4'], 'UNLV': ['UNLV', '#CF0A2C'], 'San José State': ['SJSU', '#0055A2'], 'Stanford': ['STAN', '#8C1515'], "Hawai'i": ['HAW', '#024731'], 'Fresno State': ['FRES', '#DB0032'], 'Wyoming': ['WYO', '#492F24'], 'New Mexico': ['UNM', '#BA0C2F'], 'San Diego State': ['SDSU', '#A6192E'] };
+    const [ab, c1] = T[n] || [n.slice(0, 4).toUpperCase(), '#3A3F4B'];
+    const r = parseInt(c1.slice(1, 3), 16), g = parseInt(c1.slice(3, 5), 16), b = parseInt(c1.slice(5, 7), 16);
+    return { ab, c1, fg: (0.299 * r + 0.587 * g + 0.114 * b) > 150 ? '#0C0D11' : '#F3EFE7' };
+  }
+
+  games() {
+    return [
+      { id: 1, aw: 'Auburn', hm: 'Baylor', time: '12:00 PM', tv: 'ESPN', spread: 'Baylor +1.5', sn: 1.5, ou: '58.5', chaos: 92, win: 'noon', conf: 'Big 12', tags: ['ROAD FAVORITE', 'HIGH VARIANCE'], feat: 'chaos', reason: 'Tiny spread, volatile teams, road favorite, weird things expected.', bd: [94, 89, 96, 68, 87], why: ['Spread is only 1.5 points', 'Road team is favored', 'Both teams have high turnover variance', 'Projected one-score finish'] },
+      { id: 2, aw: 'Tennessee', awR: 8, hm: 'Florida', hmR: 12, time: '12:00 PM', tv: 'ABC', spread: 'Tennessee -2.5', sn: 2.5, ou: '51.5', chaos: 84, win: 'noon', conf: 'SEC', tags: ['RIVALRY', 'CLOSE SPREAD'], feat: 'primary', reason: 'Ranked rivalry, one-score spread, hostile road environment.' },
+      { id: 3, aw: 'Iowa', hm: 'Nebraska', time: '12:00 PM', tv: 'FOX', spread: 'Nebraska -4.0', sn: 4, ou: '38.5', chaos: 71, win: 'noon', conf: 'Big Ten', tags: ['RIVALRY', 'UPSET WATCH'], feat: 'second', reason: 'Low-scoring rivalry with upset potential.' },
+      { id: 4, aw: 'Memphis', hm: 'Tulane', time: '12:00 PM', tv: 'ESPN2', spread: 'Tulane -3.0', sn: 3, ou: '55.5', chaos: 66, win: 'noon', conf: 'Other', tags: ['SHOOTOUT POTENTIAL', 'CLOSE SPREAD'] },
+      { id: 5, aw: 'Ohio State', awR: 3, hm: 'Rutgers', time: '12:00 PM', tv: 'BTN', spread: 'Ohio State -24.5', sn: 24.5, ou: '48.5', chaos: 22, win: 'noon', conf: 'Big Ten', tags: [] },
+      { id: 6, aw: 'Duke', hm: 'Wake Forest', time: '12:00 PM', tv: 'ACCN', spread: 'Duke -6.5', sn: 6.5, ou: '52.5', chaos: 44, win: 'noon', conf: 'ACC', tags: ['SICKO GAME'] },
+      { id: 7, aw: 'Georgia', awR: 1, hm: 'Clemson', hmR: 21, vs: true, time: '3:30 PM', tv: 'ABC', spread: 'Georgia -13.5', sn: 13.5, ou: '49.5', chaos: 47, win: 'aft', conf: 'SEC', tags: [] },
+      { id: 8, aw: 'Michigan', awR: 5, hm: 'Oklahoma', hmR: 14, time: '3:30 PM', tv: 'NBC', spread: 'Michigan -3.0', sn: 3, ou: '44.5', chaos: 79, win: 'aft', conf: 'SEC', tags: ['CLOSE SPREAD', 'ROAD FAVORITE'], feat: 'primary', reason: 'Top-15 matchup, one-score spread, two elite defenses.' },
+      { id: 9, aw: 'Kansas State', awR: 17, hm: 'Arizona', hmR: 22, time: '4:00 PM', tv: 'FOX', spread: 'Kansas State -1.0', sn: 1, ou: '53.5', chaos: 74, win: 'aft', conf: 'Big 12', tags: ['CLOSE SPREAD', 'UPSET WATCH'], feat: 'second', reason: 'Ranked toss-up nobody is talking about.' },
+      { id: 10, aw: 'Boise State', hm: 'Washington', time: '3:30 PM', tv: 'CBS', spread: 'Washington -2.5', sn: 2.5, ou: '56.5', chaos: 88, win: 'aft', conf: 'Other', tags: ['HIGH VARIANCE', 'UPSET WATCH'], feat: 'chaos', reason: 'G5 heavyweight, tiny spread, both teams allergic to normal finishes.' },
+      { id: 11, aw: 'Missouri', hm: 'Kansas', time: '3:30 PM', tv: 'ESPN', spread: 'Missouri -2.0', sn: 2, ou: '57.5', chaos: 69, win: 'aft', conf: 'Big 12', tags: ['RIVALRY', 'SHOOTOUT POTENTIAL'] },
+      { id: 12, aw: 'App State', hm: 'South Carolina', time: '4:15 PM', tv: 'SECN', spread: 'South Carolina -9.5', sn: 9.5, ou: '54.5', chaos: 58, win: 'aft', conf: 'SEC', tags: ['UPSET WATCH'] },
+      { id: 13, aw: 'Texas', awR: 2, hm: 'Alabama', hmR: 4, time: '7:30 PM', tv: 'ABC', spread: 'Alabama -5.5', sn: 5.5, ou: '52.5', chaos: 77, win: 'pm', conf: 'SEC', tags: ['SHOOTOUT POTENTIAL'], feat: 'primary', reason: 'Top-5 showdown under the lights in Tuscaloosa.' },
+      { id: 14, aw: 'Notre Dame', awR: 9, hm: 'Miami', hmR: 18, time: '7:30 PM', tv: 'NBC', spread: 'Notre Dame -2.5', sn: 2.5, ou: '55.5', chaos: 83, win: 'pm', conf: 'ACC', tags: ['CLOSE SPREAD', 'HIGH VARIANCE'], feat: 'second', reason: 'Ranked grudge match with a one-score spread.' },
+      { id: 15, aw: 'Colorado', hm: 'Texas Tech', time: '8:00 PM', tv: 'FOX', spread: 'Texas Tech -7.5', sn: 7.5, ou: '66.5', chaos: 86, win: 'pm', conf: 'Big 12', tags: ['SHOOTOUT POTENTIAL', 'HIGH VARIANCE'], feat: 'chaos', reason: 'Two offenses, zero defenses, and a 66-point total. Anything can happen.' },
+      { id: 16, aw: 'LSU', hm: 'USC', vs: true, time: '7:30 PM', tv: 'ESPN', spread: 'USC -1.5', sn: 1.5, ou: '59.5', chaos: 72, win: 'pm', conf: 'SEC', tags: ['CLOSE SPREAD', 'SHOOTOUT POTENTIAL'] },
+      { id: 17, aw: 'Oregon', awR: 6, hm: 'Georgia Tech', time: '7:00 PM', tv: 'ESPN2', spread: 'Oregon -14.5', sn: 14.5, ou: '57.5', chaos: 35, win: 'pm', conf: 'ACC', tags: [] },
+      { id: 18, aw: 'Utah', hm: 'UCLA', time: '8:00 PM', tv: 'FS1', spread: 'Utah -6.0', sn: 6, ou: '47.5', chaos: 41, win: 'pm', conf: 'Big Ten', tags: [] },
+      { id: 19, aw: 'UNLV', awR: 23, hm: 'San José State', time: '10:30 PM', tv: 'FS1', spread: 'UNLV -3.0', sn: 3, ou: '61.5', chaos: 67, win: 'late', conf: 'Other', tags: ['CLOSE SPREAD', 'SHOOTOUT POTENTIAL'], feat: 'primary', reason: 'Ranked G5 team on the road late. Respect the window.' },
+      { id: 20, aw: 'Stanford', hm: "Hawai'i", time: '11:00 PM', tv: 'CBSSN', spread: 'Stanford -6.5', sn: 6.5, ou: '49.5', chaos: 73, win: 'late', conf: 'Other', tags: ['HOME DOG', 'SICKO GAME'], feat: 'chaos', reason: 'Island game, home dog, 11 PM kickoff. The sicko hour delivers.' },
+      { id: 21, aw: 'Fresno State', hm: 'Wyoming', time: '10:15 PM', tv: 'CBSSN', spread: 'Fresno State -4.5', sn: 4.5, ou: '44.5', chaos: 54, win: 'late', conf: 'Other', tags: ['SICKO GAME'], feat: 'second', reason: 'Cold-weather rock fight for the true believers.' },
+      { id: 22, aw: 'New Mexico', hm: 'San Diego State', time: '10:45 PM', tv: 'FS1', spread: 'San Diego State -7.0', sn: 7, ou: '42.5', chaos: 38, win: 'late', conf: 'Other', tags: [] }
+    ];
+  }
+
+  deco(g) {
+    const t = this.tier(g.chaos);
+    const name = (n, r) => (r ? '#' + r + ' ' : '') + n;
+    const matchup = name(g.aw, g.awR) + (g.vs ? ' vs ' : ' at ') + name(g.hm, g.hmR);
+    const labels = ['Competitiveness', 'Upset Potential', 'Volatility', 'Rivalry/Emotion', 'Scoring Environment'];
+    const seed = g.id * 7 + g.chaos;
+    const vals = g.bd || labels.map((_, i) => Math.max(8, Math.min(99, g.chaos + (((seed * (i + 3)) % 17) - 8))));
+    const bd = labels.map((label, i) => ({ label, v: vals[i], pct: vals[i] + '%', color: t.color }));
+    const tagWhy = { 'CLOSE SPREAD': 'Spread inside one score', 'RIVALRY': 'Rivalry emotion runs hot', 'ROAD FAVORITE': 'Road team is favored', 'UPSET WATCH': 'Live upset scenario in play', 'HIGH VARIANCE': 'Both teams have high turnover variance', 'HOME DOG': 'Home underdog with a crowd behind it', 'SHOOTOUT POTENTIAL': 'Both offenses move fast and score', 'SICKO GAME': "Nobody neutral is watching. That's the point." };
+    let why = g.why || g.tags.map(x => tagWhy[x]).filter(Boolean);
+    if (!g.why && g.sn <= 3) why = ['Projected one-score finish', ...why];
+    if (why.length < 2) why = [...why, 'Volatility profile trends weird late'];
+    const pA = 25 + ((seed * 13) % 51);
+    const aT = this.team(g.aw), hT = this.team(g.hm);
+    const rowAccent = g.chaos >= 50 ? t.color : 'rgba(255,255,255,0.12)';
+    const rowBg = g.chaos >= 95 ? 'linear-gradient(90deg,rgba(255,92,92,0.08),#14161C 45%)' : g.chaos >= 85 ? 'linear-gradient(90deg,rgba(255,138,61,0.07),#14161C 45%)' : '#14161C';
+    return { ...g, matchup, awAb: aT.ab, awBg: aT.c1, awFg: aT.fg, awC: aT.c1, hmAb: hT.ab, hmBg: hT.c1, hmFg: hT.fg, hmC: hT.c1, rowAccent, rowBg, consAwayPct: pA + '%', consHomePct: (100 - pA) + '%', consAwayLabel: g.aw + ' ' + pA + '%', consHomeLabel: g.hm + ' ' + (100 - pA) + '%', tierLabel: t.label, tierColor: t.color, bd, why, tagList: g.tags, meta: g.time + ' · ' + g.tv + ' · ' + g.spread + ' · O/U ' + g.ou, open: () => this.setState({ selId: g.id }) };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const win = s.win || ({ 'Noon': 'noon', 'Afternoon': 'aft', 'Primetime': 'pm', 'Late Night': 'late' }[this.props.defaultWindow] ?? 'noon');
+    const all = this.games().map(g => this.deco(g));
+    const set = (o) => this.setState(o);
+    const on = '#F5A524', onBg = 'rgba(245,165,36,0.14)';
+    const chip = (label, active, pick) => ({ label, pick, bg: active ? onBg : 'transparent', color: active ? on : '#98A0AD', border: active ? 'rgba(245,165,36,0.5)' : 'rgba(255,255,255,0.12)' });
+
+    const navTabs = [['Command Center', 'command'], ['Chaos Index', 'chaos'], ['Receipts', 'receipts']].map(([label, key]) => ({ label, pick: () => set({ tab: key }), color: s.tab === key ? '#F3EFE7' : '#98A0AD', line: s.tab === key ? '#F5A524' : 'transparent' }));
+    const winDefs = [['Noon', 'noon'], ['Afternoon', 'aft'], ['Primetime', 'pm'], ['Late Night', 'late']];
+    const windowTabs = winDefs.map(([label, key]) => chip(label, win === key, () => set({ win: key })));
+
+    const sortBy = this.props.sortBy ?? 'Chaos Index';
+    const inWin = all.filter(g => g.win === win);
+    const sickoScore = g => (g.tags.includes('SICKO GAME') ? 40 : 0) + (g.win === 'late' ? 30 : 0) + ((!g.awR && !g.hmR) ? 15 : 0) + g.chaos * 0.3;
+    const windowGames = [...inWin].sort((a, b) => s.sicko ? sickoScore(b) - sickoScore(a) : sortBy === 'Kickoff time' ? a.time.localeCompare(b.time) : b.chaos - a.chaos);
+    const tickerMsgs = ['Chaos rising: Baylor ball, down 1, 3:12 to play', "Home dog alert: Hawai'i getting 6.5 at midnight", 'Memphis–Tulane chaos projection climbing: 66 → 71', 'Perry locked 3 receipts in the last hour', 'National Chaos Meter up 6 points since noon'];
+    const roles = { primary: ['PRIMARY GAME', '#98A0AD'], second: ['SECOND SCREEN', '#98A0AD'], chaos: ['CHAOS GAME', '#FF8A3D'] };
+    const featured = ['primary', 'second', 'chaos'].map(role => inWin.find(g => g.feat === role)).filter(Boolean).map(g => ({
+      ...g, role: roles[g.feat][0], roleColor: roles[g.feat][1], isChaos: g.feat === 'chaos' && g.chaos >= 85,
+      timeTv: g.time + ' · ' + g.tv,
+      cardBg: g.feat === 'chaos' ? 'linear-gradient(160deg,#1D1610,#14161C 65%)' : '#14161C',
+      cardBorder: g.feat === 'chaos' ? 'rgba(255,138,61,0.45)' : 'rgba(255,255,255,0.07)'
+    }));
+    const winLabel = winDefs.find(([, k]) => k === win)[0];
+
+    const confChips = ['All Games', 'Top 25', 'SEC', 'Big Ten', 'ACC', 'Big 12', 'Other'].map(c => chip(c, s.conf === c, () => set({ conf: c })));
+    const dayChips = [['All Day', 'all'], ...winDefs].map(([label, key]) => chip(label, s.cwin === label, () => set({ cwin: label })));
+    const cwinKey = { 'All Day': 'all', 'Noon': 'noon', 'Afternoon': 'aft', 'Primetime': 'pm', 'Late Night': 'late' }[s.cwin];
+    let chaosList = all.filter(g => cwinKey === 'all' || g.win === cwinKey);
+    if (s.conf === 'Top 25') chaosList = chaosList.filter(g => g.awR || g.hmR);
+    else if (s.conf !== 'All Games') chaosList = chaosList.filter(g => g.conf === s.conf);
+    chaosList = chaosList.sort((a, b) => b.chaos - a.chaos).map((g, i) => ({ ...g, rank: i + 1 }));
+
+    const statusColors = { 'LOCKED': '#98A0AD', 'AGING WELL': '#3DD68C', 'GETTING DANGEROUS': '#F5A524', 'NAILED IT': '#3DD68C', 'BUSTED': '#FF5C5C', 'AGED LIKE MILK': '#FF5C5C' };
+    const baseReceipts = [
+      { user: 'Perry', text: 'Georgia covers -13.5', game: 'Georgia vs Clemson', ts: 'Fri · 9:42 PM', status: 'LOCKED' },
+      { user: 'Jake', text: 'Florida beats Tennessee', game: 'Tennessee at Florida', ts: 'Fri · 8:15 PM', status: 'LOCKED' },
+      { user: 'Matt', text: 'Auburn wins by 10+', game: 'Auburn at Baylor', ts: 'Fri · 11:03 PM', status: 'LOCKED' },
+      { user: 'Jake', text: 'Iowa scores 30+ points', game: 'Iowa at Nebraska', ts: 'Thu · 6:20 PM', status: 'LOCKED' },
+      { user: 'Perry', text: 'Georgia wins by at least 17.', game: 'Georgia vs Clemson · Week 0', ts: 'Aug 28', status: 'NAILED IT', result: 'Georgia 38 · Clemson 17' },
+      { user: 'Matt', text: 'Auburn wins by double digits.', game: 'Auburn at Baylor · Week 0', ts: 'Aug 29', status: 'AGED LIKE MILK', result: 'Baylor 34 · Auburn 17' }
+    ];
+    const receiptCards = [...s.myReceipts, ...baseReceipts].map(r => ({ ...r, statusColor: statusColors[r.status], hasResult: !!r.result }));
+
+    const leaders = [
+      { rank: 1, name: 'Perry', badge: '👑', rating: 82, record: '7 right · 2 wrong', title: 'THE ORACLE', titleColor: '#F5A524', streak: '🔥 5-receipt heater', streakColor: '#F5A524' },
+      { rank: 2, name: 'Jake', badge: '', rating: 68, record: '6 right · 4 wrong', title: 'THE HEDGER', titleColor: '#98A0AD', streak: 'Won 2 of his last 3', streakColor: '#98A0AD' },
+      { rank: 3, name: 'Matt', badge: '', rating: 41, record: '3 right · 6 wrong', title: 'THE MILK MAN', titleColor: '#FF5C5C', streak: '❄️ 0 for his last 4', streakColor: '#6B7280' }
+    ].map(l => ({ ...l, rankColor: l.rank === 1 ? '#F5A524' : '#3A3F4B', scoreColor: l.rating >= 70 ? '#3DD68C' : l.rating >= 50 ? '#F3EFE7' : '#FF5C5C', bg: l.rank === 1 ? 'rgba(245,165,36,0.06)' : 'transparent', border: l.rank === 1 ? 'rgba(245,165,36,0.35)' : 'rgba(255,255,255,0.07)' }));
+
+    const sel = s.selId ? all.find(g => g.id === s.selId) : null;
+    const watched = sel && s.watch[sel.id];
+    const rtypes = ['Winner', 'Spread', 'Player', 'Team', 'Hot Take', 'Custom'].map(t => chip(t, s.rtype === t, () => set({ rtype: t })));
+    const confLevels = [1, 2, 3, 4, 5].map(n => ({ n, pick: () => set({ rconf: n }), bg: s.rconf === n ? onBg : 'transparent', color: s.rconf === n ? on : '#98A0AD', border: s.rconf === n ? 'rgba(245,165,36,0.5)' : 'rgba(255,255,255,0.12)' }));
+
+    return {
+      navTabs, windowTabs, featured, windowGames,
+      isCommand: s.tab === 'command', isChaos: s.tab === 'chaos', isReceipts: s.tab === 'receipts',
+      allGamesHeader: s.sicko ? 'CERTIFIED SICKO BOARD — ' + winLabel.toUpperCase() : 'ALL ' + winLabel.toUpperCase() + ' GAMES',
+      sortLabel: s.sicko ? 'pure degeneracy' : (sortBy === 'Kickoff time' ? 'kickoff time' : 'Chaos Index'),
+      toggleSicko: () => set({ sicko: !s.sicko }),
+      sickoBg: s.sicko ? 'rgba(61,214,140,0.14)' : 'transparent', sickoColor: s.sicko ? '#3DD68C' : '#6B7280', sickoBorder: s.sicko ? 'rgba(61,214,140,0.5)' : 'rgba(255,255,255,0.12)',
+      tickerMsg: tickerMsgs[s.tickerIdx % tickerMsgs.length],
+      openTakeover: () => set({ takeover: true }), closeTakeover: () => set({ takeover: false }), showTakeover: s.takeover,
+      recapLabel: s.recapShared ? 'Copied — send it Sunday morning' : 'Share the recap', recapShare: () => { set({ recapShared: true }); setTimeout(() => this.setState({ recapShared: false }), 2000); },
+      showAlert: this.props.showLiveAlert ?? true,
+      chat: [
+        { name: 'Jake', init: 'J', avBg: '#7DD3FC', msg: 'locked Florida outright', time: '11:42 AM' },
+        { name: 'Matt', init: 'M', avBg: '#FCA5A5', msg: 'faded the group on Auburn', time: '11:45 AM' },
+        { name: 'Perry', init: 'P', avBg: '#F5A524', msg: 'is on a 5-receipt heater', time: '11:51 AM' },
+        { name: 'Saturday Sickos', init: 'S', avBg: '#3DD68C', msg: '4 of 5 members picked Tennessee', time: '11:58 AM' }
+      ],
+      receiptPreview: [
+        { user: 'Perry', text: 'Georgia covers -13.5' },
+        { user: 'Jake', text: 'Florida beats Tennessee' },
+        { user: 'Matt', text: 'Auburn wins by 10+' }
+      ],
+      goReceipts: () => set({ tab: 'receipts' }),
+      confChips, dayChips, chaosTop: chaosList.slice(0, 3), chaosRest: chaosList.slice(3),
+      openMethod: () => set({ method: true }), closeMethod: () => set({ method: false }), showMethod: s.method,
+      methodFactors: ['Point spread', 'Upset probability', 'Team volatility', 'Rivalry and emotional stakes', 'Home-underdog status', 'Scoring environment', 'Recent performance', 'Situational weirdness'],
+      leaders, receiptCards,
+      shareLabel: s.shared ? 'Copied — go ruin his day' : 'Share to the group chat',
+      fakeShare: () => { set({ shared: true }); setTimeout(() => this.setState({ shared: false }), 2000); },
+      hasSel: !!sel, sel: sel || {}, closeSel: () => set({ selId: null }),
+      eatClick: (e) => e.stopPropagation(),
+      watchLabel: watched ? '✓ ON YOUR WATCH PLAN' : 'ADD TO WATCH PLAN',
+      watchBg: watched ? 'rgba(61,214,140,0.12)' : 'rgba(245,165,36,0.14)',
+      watchColor: watched ? '#3DD68C' : '#F5A524',
+      toggleWatch: () => sel && set({ watch: { ...s.watch, [sel.id]: !s.watch[sel.id] } }),
+      receiptFromSel: () => sel && set({ rmodal: true, rgame: sel.matchup.replace(/#\d+ /g, '') }),
+      showReceiptModal: s.rmodal,
+      openReceipt: () => set({ rmodal: true }),
+      closeReceipt: () => set({ rmodal: false }),
+      rtext: s.rtext, onRtext: (e) => set({ rtext: e.target.value }),
+      rgame: s.rgame, onRgame: (e) => set({ rgame: e.target.value }),
+      gameOptions: all.map(g => g.matchup.replace(/#\d+ /g, '')),
+      rtypes, confLevels,
+      lockReceipt: () => {
+        const text = s.rtext.trim();
+        if (!text) return;
+        this.setState({
+          myReceipts: [{ user: 'You', text, game: s.rgame + ' · ' + s.rtype + ' · Confidence ' + s.rconf + '/5', ts: 'Just now', status: 'LOCKED' }, ...s.myReceipts],
+          rmodal: false, rtext: '', selId: null, tab: 'receipts'
+        });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
